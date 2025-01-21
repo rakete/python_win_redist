@@ -19,7 +19,7 @@ jobs:
       - name: Install msbuild tools
         shell: cmd
         run: |
-           BuildTools_Full.exe /quiet /norestart
+           BuildTools_Full.exe /norestart
 
       - name: Download Python 3.6
         run: |
@@ -30,20 +30,20 @@ jobs:
         run: |
           python-3.6.8.exe /quiet PrependPath=1 Include_test=0
           dir %LocalAppData%\Programs\Python
-          
+
       - name: Prepare Python 3.6 venv
         shell: cmd
         run: |
           mkdir C:\venv
           %LocalAppData%\Programs\Python\Python36\python.exe -m venv c:\venv
           dir C:\venv
-          
+
       - name: Install pip dependency
         shell: cmd
         working-directory: C:\venv
         run: |
           .\Scripts\pip3.exe install Sphinx==3.5.4
-          
+
       - name: Download Python 3.9 source
         run: |
           curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.9.21/Python-3.9.21.tar.xz
@@ -63,13 +63,13 @@ jobs:
           cmd.exe /C build.bat
           dir C:\venv\PCbuild\amd64
           dir C:\venv\PCbuild\amd64\en-us
-  
+
       - name: Generate release tag
         shell: pwsh
         id: tag
         run: |
           "release_tag=UserBuild_$(date +"%Y.%m.%d_%H-%M")" >> $env:GITHUB_OUTPUT
-          
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
