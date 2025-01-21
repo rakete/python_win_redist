@@ -42,7 +42,7 @@ jobs:
         shell: cmd
         working-directory: C:\venv
         run: |
-          .\Scripts\pip3.exe install Sphinx==3.5.4
+          .\Scripts\pip3.exe install Sphinx==6.2.1
 
       - name: Download Python 3.x source
         run: |
