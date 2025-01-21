@@ -38,11 +38,11 @@ jobs:
           %LocalAppData%\Programs\Python\Python36\python.exe -m venv c:\venv
           dir C:\venv
 
-      - name: Install pip dependency
-        shell: cmd
-        working-directory: C:\venv
-        run: |
-          .\Scripts\pip3.exe install Sphinx==6.2.1
+      # - name: Install pip dependency
+      #   shell: cmd
+      #   working-directory: C:\venv
+      #   run: |
+      #     .\Scripts\pip3.exe install Sphinx==6.2.1
 
       - name: Download Python 3.x source
         run: |
