@@ -21,28 +21,29 @@ jobs:
         run: |
            BuildTools_Full.exe /quiet /norestart
 
-      - name: Download Python 3.6
+      - name: Download bootstrap Python
         run: |
-          curl -o python-3.6.8.exe https://www.python.org/ftp/python/3.6.8/python-3.6.8-amd64.exe
+          #curl -o bootstrap-python.exe https://www.python.org/ftp/python/3.6.8/python-3.6.8-amd64.exe
+          curl -o bootstrap-python.exe https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe
 
-      - name: Install Python 3.6
+      - name: Install bootstrap Python
         shell: cmd
         run: |
-          python-3.6.8.exe /quiet PrependPath=1 Include_test=0
+          bootstrap-python.exe /quiet PrependPath=1 Include_test=0
           dir %LocalAppData%\Programs\Python
 
-      - name: Prepare Python 3.6 venv
+      - name: Prepare bootstrap Python venv
         shell: cmd
         run: |
           mkdir C:\venv
           %LocalAppData%\Programs\Python\Python36\python.exe -m venv c:\venv
           dir C:\venv
 
-      # - name: Install pip dependency
-      #   shell: cmd
-      #   working-directory: C:\venv
-      #   run: |
-      #     .\Scripts\pip3.exe install Sphinx==6.2.1
+      - name: Install pip dependency
+        shell: cmd
+        working-directory: C:\venv
+        run: |
+          .\Scripts\pip3.exe install sphinx==7.2.0
 
       - name: Download Python 3.x source
         run: |
