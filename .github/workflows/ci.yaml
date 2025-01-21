@@ -19,7 +19,7 @@ jobs:
       - name: Install msbuild tools
         shell: cmd
         run: |
-           BuildTools_Full.exe /norestart
+           BuildTools_Full.exe /quiet /norestart
 
       - name: Download Python 3.6
         run: |
