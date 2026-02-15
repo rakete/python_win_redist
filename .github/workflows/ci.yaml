@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir C:\venv
           %LocalAppData%\Programs\Python\Python310\python.exe -m venv c:\venv
-          #%LocalAppData%\Programs\Python\Python311\python.exe -m venv c:\venv
+          REM %LocalAppData%\Programs\Python\Python311\python.exe -m venv c:\venv
           dir C:\venv
 
       - name: Install pip dependency
@@ -45,7 +45,7 @@ jobs:
         working-directory: C:\venv
         run: |
           .\Scripts\pip3.exe install Sphinx==6.2.1
-          #.\Scripts\pip3.exe install sphinx==7.2.0
+          REM .\Scripts\pip3.exe install sphinx==7.2.0
 
       - name: Download Python 3.x source
         run: |          
