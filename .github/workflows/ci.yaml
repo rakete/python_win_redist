@@ -46,10 +46,9 @@ jobs:
           .\Scripts\pip3.exe install sphinx==7.2.0
 
       - name: Download Python 3.x source
-        run: |
-          #curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.9.21/Python-3.9.21.tar.xz
-          #curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.10.16/Python-3.10.16.tar.xz
-          curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.11.11/Python-3.11.11.tar.xz
+        run: |          
+          #curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.10.19/Python-3.10.19.tar.xz
+          curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.11.14/Python-3.11.14.tar.xz
 
       - name: Extract Python 3.x source directly into venv
         shell: cmd
