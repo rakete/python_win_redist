@@ -46,7 +46,7 @@ jobs:
         shell: cmd
         working-directory: C:\venv
         run: |
-          .\Scripts\pip3.exe install sphinx==9.0.4
+          .\Scripts\pip3.exe install sphinx==7.2.6
           REM .\Scripts\pip3.exe install sphinx==7.2.0
           REM .\Scripts\pip3.exe install Sphinx==6.2.1
 
