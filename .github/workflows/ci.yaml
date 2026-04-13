@@ -70,11 +70,28 @@ jobs:
           dir C:\venv\PCbuild\amd64
           dir C:\venv\PCbuild\amd64\en-us
 
+      - name: Upload installers
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-installers
+          path: C:/venv/PCbuild/amd64/en-us/*.exe
+
+  create_release:
+    name: create release
+    needs: build_release
+    runs-on: ubuntu-latest
+    steps:
       - name: Generate release tag
-        shell: pwsh
+        shell: bash
         id: tag
         run: |
-          "release_tag=UserBuild_$(date +"%Y.%m.%d_%H-%M")" >> $env:GITHUB_OUTPUT
+          echo "release_tag=UserBuild_$(date +"%Y.%m.%d_%H-%M")" >> $GITHUB_OUTPUT
+
+      - name: Download all installers
+        uses: actions/download-artifact@v3
+        with:
+          name: python-installers
+          path: installers
 
       - name: Release
         uses: softprops/action-gh-release@v1
@@ -82,4 +99,4 @@ jobs:
           fail_on_unmatched_files: true
           tag_name: ${{ steps.tag.outputs.release_tag }}
           files: |
-            C:/venv/PCbuild/amd64/en-us/*.exe
+            installers/*.exe
