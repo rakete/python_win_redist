@@ -6,6 +6,12 @@ jobs:
   build_release:
     name: build and release
     runs-on: windows-2022
+    strategy:
+      matrix:
+        python_version:
+          - { bootstrap: "3.10.11", source: "3.10.20", venv_path: "Python310" }
+          - { bootstrap: "3.11.9", source: "3.11.15", venv_path: "Python311" }
+          - { bootstrap: "3.12.10", source: "3.12.13", venv_path: "Python312" }
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -14,18 +20,16 @@ jobs:
 
       - name: Download msbuild 140 tools (2015)
         run: |
-           curl -o BuildTools_Full.exe https://download.microsoft.com/download/E/E/D/EEDF18A8-4AED-4CE0-BEBE-70A83094FC5A/BuildTools_Full.exe
+          curl -o BuildTools_Full.exe https://download.microsoft.com/download/E/E/D/EEDF18A8-4AED-4CE0-BEBE-70A83094FC5A/BuildTools_Full.exe
 
       - name: Install msbuild tools
         shell: cmd
         run: |
-           BuildTools_Full.exe /quiet /norestart
+          BuildTools_Full.exe /quiet /norestart
 
       - name: Download bootstrap Python
         run: |
-          #curl -o bootstrap-python.exe https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe
-          #curl -o bootstrap-python.exe https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe
-          curl -o bootstrap-python.exe https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe
+          curl -o bootstrap-python.exe https://www.python.org/ftp/python/${{ matrix.python_version.bootstrap }}/python-${{ matrix.python_version.bootstrap }}-amd64.exe
 
       - name: Install bootstrap Python
         shell: cmd
@@ -37,24 +41,18 @@ jobs:
         shell: cmd
         run: |
           mkdir C:\venv
-          REM %LocalAppData%\Programs\Python\Python312\python.exe -m venv c:\venv
-          REM %LocalAppData%\Programs\Python\Python311\python.exe -m venv c:\venv
-          %LocalAppData%\Programs\Python\Python310\python.exe -m venv c:\venv
+          %LocalAppData%\Programs\Python\${{ matrix.python_version.venv_path }}\python.exe -m venv c:\venv
           dir C:\venv
 
       - name: Install pip dependency
         shell: cmd
         working-directory: C:\venv
         run: |
-          REM .\Scripts\pip3.exe install sphinx==9.1.0
-          REM .\Scripts\pip3.exe install sphinx==7.2.0
-          REM .\Scripts\pip3.exe install Sphinx==6.2.1
+          echo No pip dependencies currently needed
 
       - name: Download Python 3.x source
         run: |
-          #curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.12.13/Python-3.12.13.tar.xz
-          #curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.11.15/Python-3.11.15.tar.xz
-          curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.10.20/Python-3.10.20.tar.xz
+          curl -o C:\python.tar.xz https://www.python.org/ftp/python/${{ matrix.python_version.source }}/Python-${{ matrix.python_version.source }}.tar.xz
 
       - name: Extract Python 3.x source directly into venv
         shell: cmd
