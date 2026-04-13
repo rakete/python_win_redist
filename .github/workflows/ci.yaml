@@ -46,7 +46,7 @@ jobs:
         shell: cmd
         working-directory: C:\venv
         run: |
-          .\Scripts\pip3.exe install sphinx==7.2.6
+          REM .\Scripts\pip3.exe install sphinx==9.1.0
           REM .\Scripts\pip3.exe install sphinx==7.2.0
           REM .\Scripts\pip3.exe install Sphinx==6.2.1
 
@@ -68,7 +68,7 @@ jobs:
 
       - name: Build Python 3.x from source
         run: |
-          cmd.exe /C build.bat
+          cmd.exe /C build.bat -p x64 --no-doc 
           dir C:\venv\PCbuild\amd64
           dir C:\venv\PCbuild\amd64\en-us
 
