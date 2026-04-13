@@ -23,7 +23,8 @@ jobs:
 
       - name: Download bootstrap Python
         run: |
-          curl -o bootstrap-python.exe https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe
+          curl -o bootstrap-python.exe https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe
+          #curl -o bootstrap-python.exe https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe
           #curl -o bootstrap-python.exe https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe
 
       - name: Install bootstrap Python
@@ -36,8 +37,9 @@ jobs:
         shell: cmd
         run: |
           mkdir C:\venv
-          %LocalAppData%\Programs\Python\Python310\python.exe -m venv c:\venv
+          %LocalAppData%\Programs\Python\Python312\python.exe -m venv c:\venv
           REM %LocalAppData%\Programs\Python\Python311\python.exe -m venv c:\venv
+          REM %LocalAppData%\Programs\Python\Python310\python.exe -m venv c:\venv
           dir C:\venv
 
       - name: Install pip dependency
@@ -48,9 +50,10 @@ jobs:
           REM .\Scripts\pip3.exe install sphinx==7.2.0
 
       - name: Download Python 3.x source
-        run: |          
-          curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.10.19/Python-3.10.19.tar.xz
-          #curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.11.14/Python-3.11.14.tar.xz
+        run: |
+          curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.12.13/Python-3.12.13.tar.xz
+          #curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.11.15/Python-3.11.15.tar.xz
+          #curl -o C:\python.tar.xz https://www.python.org/ftp/python/3.10.20/Python-3.10.20.tar.xz
 
       - name: Extract Python 3.x source directly into venv
         shell: cmd
