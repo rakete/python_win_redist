@@ -71,7 +71,7 @@ jobs:
           dir C:\venv\PCbuild\amd64\en-us
 
       - name: Upload installers
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: python-installers
           path: C:/venv/PCbuild/amd64/en-us/*.exe
