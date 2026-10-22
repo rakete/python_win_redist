@@ -9,9 +9,9 @@ jobs:
     strategy:
       matrix:
         python_version:
-          - { bootstrap: "3.10.11", source: "3.10.20", venv_path: "Python310" }
-          - { bootstrap: "3.11.9", source: "3.11.15", venv_path: "Python311" }
-          - { bootstrap: "3.12.10", source: "3.12.13", venv_path: "Python312" }
+          - { bootstrap: "3.10.11", source: "3.10.22", venv_path: "Python310" }
+          - { bootstrap: "3.11.9", source: "3.11.17", venv_path: "Python311" }
+          - { bootstrap: "3.12.10", source: "3.12.15", venv_path: "Python312" }
     steps:
       - name: Checkout
         uses: actions/checkout@v3
